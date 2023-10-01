@@ -1,0 +1,31 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+server:
+  port: 8081
+logging:
+  level:
+    org:
+      springframework:
+        web: debug
+  file:
+    name: "${logging.file.path}/car-washer.log"
+    path: "/Users/o.yapparov"
+---
+
+management:
+  endpoints:
+    enabled-by-default: false
+server:
+  port: 8080
+spring:
+  config:
+    activate:
+      on-profile: prod
