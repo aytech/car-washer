@@ -2,6 +2,8 @@ package com.washer.web;
 
 import com.washer.model.Car;
 import com.washer.model.Driver;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +17,24 @@ public class WasherController {
 
     @RequestMapping(value = "/cars")
     public List<Car> getCars() {
+        return getCarsData();
+    }
+
+    @RequestMapping(value = "/cache-bust")
+    public ModelAndView cacheBustingTest() {
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("cache-bust");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/cars/{index}")
+    public ResponseEntity<Car> getCar(@PathVariable(value = "index") int index) {
+        return ResponseEntity.ok(getCarsData().get(index));
+    }
+
+    private List<Car> getCarsData() {
         List<Car> cars = new ArrayList<>();
 
         Driver driver1 = new Driver(1, "John", "Smith", "Phone 1", "Address 1");
@@ -30,14 +50,5 @@ public class WasherController {
         cars.add(car3);
 
         return cars;
-    }
-
-    @RequestMapping(value = "/cache-bust")
-    public ModelAndView cacheBustingTest() {
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("cache-bust");
-
-        return modelAndView;
     }
 }
