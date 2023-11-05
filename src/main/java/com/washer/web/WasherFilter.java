@@ -14,9 +14,9 @@ public class WasherFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        servletResponse.getWriter().write("before custom filter...");
+        servletResponse.getWriter().write("before custom filter...\n");
         filterChain.doFilter(servletRequest, servletResponse);
-        servletResponse.getWriter().write("after custom filter...");
+        servletResponse.getWriter().write("after custom filter...\n");
     }
 
     @Override

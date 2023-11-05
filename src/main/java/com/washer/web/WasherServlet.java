@@ -12,6 +12,6 @@ import java.io.IOException;
 public class WasherServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served. Hello World").append(request.getContextPath());
+        response.getWriter().append("Served. Hello World\n").append(request.getContextPath());
     }
 }
