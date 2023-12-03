@@ -1,30 +1,32 @@
 package com.washer.model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
+@Entity
 public class Wash {
-    private Driver driver;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "car")
     private Car car;
-    private Date date;
+
+    private Date wash_date;
     private int price;
 
     public Wash() {
     }
 
-    public Wash(Driver driver, Car car, Date date, int price) {
-        this.driver = driver;
+    public Wash(Car car, Date wash_date, int price) {
         this.car = car;
-        this.date = date;
+        this.wash_date = wash_date;
         this.price = price;
-    }
-
-    public Driver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
     }
 
     public Car getCar() {
@@ -35,12 +37,12 @@ public class Wash {
         this.car = car;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getWash_date() {
+        return wash_date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setWash_date(Date wash_date) {
+        this.wash_date = wash_date;
     }
 
     public int getPrice() {
@@ -56,11 +58,11 @@ public class Wash {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Wash wash = (Wash) o;
-        return price == wash.price && Objects.equals(driver, wash.driver) && Objects.equals(car, wash.car) && Objects.equals(date, wash.date);
+        return price == wash.price && Objects.equals(car, wash.car) && Objects.equals(wash_date, wash.wash_date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(driver, car, date, price);
+        return Objects.hash(car, wash_date, price);
     }
 }

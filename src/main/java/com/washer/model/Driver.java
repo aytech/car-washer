@@ -1,12 +1,26 @@
 package com.washer.model;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
+@Entity
 public class Driver {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String surname;
+
+    @Column(nullable = false)
     private String phone;
+
+    @Column(nullable = false)
     private String address;
 
     public Driver() {

@@ -3,17 +3,22 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/links
-    username: postgres
-    password: postgres
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+  #    url: jdbc:postgresql://localhost:5432/links
+  #    username: postgres
+  #    password: postgres
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc:
           batch_size: 1000
+        show_sql: true
+        format_sql: true
   web:
     resources:
       chain:

@@ -1,23 +1,38 @@
 package com.washer.model;
 
+
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@SuppressWarnings("unused")
+@Entity
 public class Car {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(nullable = false)
     private String model;
+
+    @Column(nullable = false)
     private String color;
+
+    @ManyToOne
+    @JoinColumn(name = "driver")
     private Driver driver;
-    private int year;
+
+    private int production;
 
     public Car() {
     }
 
-    public Car(int id, String model, String color, Driver driver, int year) {
+    public Car(int id, String model, String color, Driver driver, int production) {
         this.id = id;
         this.model = model;
         this.color = color;
         this.driver = driver;
-        this.year = year;
+        this.production = production;
     }
 
     public int getId() {
@@ -52,24 +67,17 @@ public class Car {
         this.driver = driver;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return id == car.id && year == car.year && Objects.equals(model, car.model) && Objects.equals(color, car.color) && Objects.equals(driver, car.driver);
+        return id == car.id && production == car.production && Objects.equals(model, car.model)
+                && Objects.equals(color, car.color) && Objects.equals(driver, car.driver);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, model, color, driver, year);
+        return Objects.hash(id, model, color, driver, production);
     }
 }
